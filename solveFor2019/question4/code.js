@@ -1,23 +1,32 @@
 const matched = [];
 
-for (let index = 271973; index <= 785961; index++) {
-  const inputArray = [...index.toString()];
-  let isMatch = true;
+const checkHasDouble = (inputArray) => {
   let doubleCount = 0;
+  let hasPerfectDouble = false;
 
-  for (let index = 0; index < inputArray.length - 1; index++) {
-    if (!isMatch) break;
-    if (inputArray[index] === inputArray[index + 1]) {
-      doubleCount++;
-      break;
+  for (let i = 0; i < inputArray.length - 1; i++) {
+    if (
+      !hasPerfectDouble && doubleCount === 2 &&
+      inputArray[i] === inputArray[i - 1]
+    ) {
+      hasPerfectDouble = true;
     }
-    if (inputArray[index] > inputArray[index + 1]) {
-      isMatch = false;
-      break;
+
+    if (inputArray[i] === inputArray[i + 1]) {
+      doubleCount++;
+    }
+
+    if (inputArray[i] > inputArray[i + 1]) {
+      return false;
     }
   }
 
-  if (isMatch && doubleCount > 0) matched.push(index);
+  return true && (doubleCount === 1 || hasPerfectDouble);
+};
+
+for (let index = 271973; index <= 785961; index++) {
+  const inputArray = [...index.toString()];
+  if (checkHasDouble(inputArray)) matched.push(index);
 }
 
 console.log(matched.length);

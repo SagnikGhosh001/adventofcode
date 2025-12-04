@@ -1,0 +1,23 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@hugoalh/setation@*": "2.0.1",
+    "jsr:@hugoalh/setation@^2.0.1": "2.0.1",
+    "jsr:@std/collections@*": "1.1.3",
+    "jsr:@std/collections@^1.1.3": "1.1.3"
+  },
+  "jsr": {
+    "@hugoalh/setation@2.0.1": {
+      "integrity": "3bf0d87cd39a51103da1f7de66c6ea1f6b13d3f2df9bce4a7f31cb10b4df5ab7"
+    },
+    "@std/collections@1.1.3": {
+      "integrity": "bf8b0818886df6a32b64c7d3b037a425111f28278d69fd0995aeb62777c986b0"
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@hugoalh/setation@^2.0.1",
+      "jsr:@std/collections@^1.1.3"
+    ]
+  }
+}

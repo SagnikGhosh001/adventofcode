@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@hugoalh/setation": "jsr:@hugoalh/setation@^2.0.1",
+    "@std/collections": "jsr:@std/collections@^1.1.3"
+  }
+}

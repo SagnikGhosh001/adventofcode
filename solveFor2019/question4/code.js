@@ -5,23 +5,19 @@ const checkHasDouble = (inputArray) => {
   let hasPerfectDouble = false;
 
   for (let i = 0; i < inputArray.length - 1; i++) {
-    if (
-      !hasPerfectDouble && doubleCount === 2 &&
-      inputArray[i] === inputArray[i - 1]
-    ) {
-      hasPerfectDouble = true;
-    }
-
-    if (inputArray[i] === inputArray[i + 1]) {
-      doubleCount++;
-    }
-
     if (inputArray[i] > inputArray[i + 1]) {
       return false;
     }
+    if (inputArray[i] === inputArray[i + 1]) {
+      doubleCount++;
+    } else {
+      if (doubleCount === 1) hasPerfectDouble = true;
+      doubleCount = 0;
+    }
   }
 
-  return true && (doubleCount === 1 || hasPerfectDouble);
+  if (doubleCount === 1) hasPerfectDouble = true;
+  return true && hasPerfectDouble;
 };
 
 for (let index = 271973; index <= 785961; index++) {

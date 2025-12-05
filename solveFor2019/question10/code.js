@@ -68,7 +68,8 @@ const calculateSomething = (station, coordinates) => {
     ) {
       const dx = coordinates[index][1] - station.curentCoor[1];
       const dy = coordinates[index][0] - station.curentCoor[0];
-      const angle = Math.atan2(dx, -dy);
+      let angle = Math.atan2(dx, -dy);
+      if (angle < 0) angle += 2 * Math.PI;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       array.push({
@@ -91,12 +92,33 @@ const main = () => {
 
   const station = counts.sort((a, b) => b.count - a.count)[0];
   const hits = calculateSomething(station, coordinates);
-  console.log(
-    hits.sort((a, b) => {
-      if (a.angle !== b.angle) return a.angle - b.angle;
-      return a.distance - b.distance;
-    })[200    ],
+  const object = {};
+
+  for (const element of hits) {
+    if (!(element.angle in object)) object[element.angle] = [];
+    object[element.angle].push(element);
+  }
+
+  for (const angle in object) {
+    object[angle].sort((a, b) => a.distance - b.distance);
+  }
+
+  const keys = Object.keys(object).map((x) => parseFloat(x)).sort((a, b) =>
+    a - b
   );
+
+  const v = [];
+  let i = 0;
+  while (v.length < 200) {
+    const angle = keys[i];
+    if (object[angle].length > 0) {
+      v.push(object[angle].shift());
+    }
+
+    i = (i + 1) % keys.length;
+  }
+
+  console.log(v[199]);
 };
 
 main();

@@ -1,22 +1,55 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@alg/priority-queue@*": "0.0.4",
+    "jsr:@babia/tiny-math@~0.1.5": "0.1.5",
+    "jsr:@discrete-math/set-theory@*": "0.1.0",
     "jsr:@hugoalh/setation@*": "2.0.1",
     "jsr:@hugoalh/setation@^2.0.1": "2.0.1",
+    "jsr:@ordo-pink/deep-equals@*": "0.1.0",
+    "jsr:@ordo-pink/deep-equals@0.1": "0.1.0",
+    "jsr:@std/assert@*": "1.0.16",
+    "jsr:@std/assert@^1.0.16": "1.0.16",
     "jsr:@std/collections@*": "1.1.3",
-    "jsr:@std/collections@^1.1.3": "1.1.3"
+    "jsr:@std/collections@^1.1.3": "1.1.3",
+    "jsr:@std/internal@^1.0.12": "1.0.12"
   },
   "jsr": {
+    "@alg/priority-queue@0.0.4": {
+      "integrity": "92f402ff31959399d5c3f5f28f1dae8577182e020ba5d651d9710394ddac362a"
+    },
+    "@babia/tiny-math@0.1.5": {
+      "integrity": "5c3c64f19a303ffcbf03f53bc40917ab2631063ca39f922f2675cd7f454c4994"
+    },
+    "@discrete-math/set-theory@0.1.0": {
+      "integrity": "8025236b4d8c84ea065bb80fb98951f4ff69075e989a5604b077aa5a727b9d58"
+    },
     "@hugoalh/setation@2.0.1": {
       "integrity": "3bf0d87cd39a51103da1f7de66c6ea1f6b13d3f2df9bce4a7f31cb10b4df5ab7"
     },
+    "@ordo-pink/deep-equals@0.1.0": {
+      "integrity": "6be45f4593d4bb6820b6907b2b4ddebed33ae9f69c5c0c26ce1f2b00b9e4ab9b"
+    },
+    "@std/assert@1.0.16": {
+      "integrity": "6a7272ed1eaa77defe76e5ff63ca705d9c495077e2d5fd0126d2b53fc5bd6532",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
     "@std/collections@1.1.3": {
       "integrity": "bf8b0818886df6a32b64c7d3b037a425111f28278d69fd0995aeb62777c986b0"
+    },
+    "@std/internal@1.0.12": {
+      "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
     }
   },
   "workspace": {
     "dependencies": [
+      "jsr:@alg/priority-queue@^0.0.4",
+      "jsr:@babia/tiny-math@~0.1.5",
       "jsr:@hugoalh/setation@^2.0.1",
+      "jsr:@ordo-pink/deep-equals@0.1",
+      "jsr:@std/assert@^1.0.16",
       "jsr:@std/collections@^1.1.3"
     ]
   }

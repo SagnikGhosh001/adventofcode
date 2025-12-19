@@ -57,30 +57,24 @@ const countVisibleAsteroid = (curentCoor, curentIndex, coordinates) => {
   return { curentCoor, count: visibleAsteroid.length };
 };
 
-const calculateSomething = (station, coordinates) => {
-  // console.log(station.curentCoor[0], coordinates);
+const calculateAnglesWithDIstance = (station, coordinates) => {
+  const result = [];
 
-  const array = [];
   for (let index = 0; index < coordinates.length; index++) {
-    if (
-      coordinates[index][0] !== station.curentCoor[0] &&
-      coordinates[index][1] !== station.curentCoor[1]
-    ) {
-      const dx = coordinates[index][1] - station.curentCoor[1];
-      const dy = coordinates[index][0] - station.curentCoor[0];
-      let angle = Math.atan2(dx, -dy);
-      if (angle < 0) angle += 2 * Math.PI;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+    const dx = coordinates[index][1] - station.curentCoor[1];
+    const dy = coordinates[index][0] - station.curentCoor[0];
+    let angle = Math.atan2(dx, -dy);
+    if (angle < 0) angle += 2 * Math.PI;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-      array.push({
-        angle,
-        distance,
-        x: coordinates[index][1],
-        y: coordinates[index][0],
-      });
-    }
+    result.push({
+      angle,
+      distance,
+      x: coordinates[index][1],
+      y: coordinates[index][0],
+    });
   }
-  return array;
+  return result;
 };
 
 const main = () => {
@@ -91,34 +85,35 @@ const main = () => {
   }
 
   const station = counts.sort((a, b) => b.count - a.count)[0];
-  const hits = calculateSomething(station, coordinates);
-  const object = {};
+  const anglesWithDIstance = calculateAnglesWithDIstance(station, coordinates);
+  const angleGroup = {};
 
-  for (const element of hits) {
-    if (!(element.angle in object)) object[element.angle] = [];
-    object[element.angle].push(element);
+  for (const element of anglesWithDIstance) {
+    if (!(element.angle in angleGroup)) angleGroup[element.angle] = [];
+    angleGroup[element.angle].push(element);
   }
 
-  for (const angle in object) {
-    object[angle].sort((a, b) => a.distance - b.distance);
+  for (const angle in angleGroup) {
+    angleGroup[angle].sort((a, b) => a.distance - b.distance);
   }
 
-  const keys = Object.keys(object).map((x) => parseFloat(x)).sort((a, b) =>
-    a - b
-  );
+  const angles = Object.keys(angleGroup).map((x) => parseFloat(x)).sort((
+    a,
+    b,
+  ) => a - b);
 
   const v = [];
   let i = 0;
   while (v.length < 200) {
-    const angle = keys[i];
-    if (object[angle].length > 0) {
-      v.push(object[angle].shift());
+    const angle = angles[i];
+    if (angleGroup[angle].length > 0) {
+      v.push(angleGroup[angle].shift());
     }
 
-    i = (i + 1) % keys.length;
+    i = (i + 1) % angles.length;
   }
 
-  console.log(v[199]);
+  console.log(v[199], station);
 };
 
 main();

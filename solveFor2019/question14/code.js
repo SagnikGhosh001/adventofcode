@@ -49,8 +49,8 @@ const parseInput = () => {
   return { producer, finalReaction, middleReactions };
 };
 
-const need = {};
-const extra = {};
+let need = {};
+let extra = {};
 
 const calulateNeed = (ele, amount) => {
   need[ele] = (need[ele] || 0) + amount;
@@ -122,13 +122,28 @@ const caluclateTotalOre = (producer) => {
   return totalOre;
 };
 
+const binarySearch = (low, high, finalReaction, producer, middleReactions) => {
+  need = {};
+  extra = {};
+  const mid = Math.floor((low + high) / 2);
+  checkElementInProducer(finalReaction[0], producer, middleReactions, mid);
+  const totalOre = caluclateTotalOre(producer);
+  if (totalOre <= 1000000000000) low = mid + 1;
+  else high = mid - 1;
+  if (low > high) return mid;
+  return binarySearch(low, high, finalReaction, producer, middleReactions);
+};
+
 const main = () => {
   const { producer, finalReaction, middleReactions } = parseInput();
-  checkElementInProducer(finalReaction[0], producer, middleReactions, 1);
-  const totalOre = caluclateTotalOre(producer);
-  console.log(need);
-  console.log({ totalOre });
-  // console.log({ producer, finalReaction, middleReactions });
+  const ore = binarySearch(
+    0,
+    Math.floor(1000000000000),
+    finalReaction,
+    producer,
+    middleReactions,
+  );
+  console.log(ore);
 };
 
 main();

@@ -138,7 +138,7 @@ const main = () => {
   const { producer, finalReaction, middleReactions } = parseInput();
   const ore = binarySearch(
     0,
-    Math.floor(1000000000000),
+    1000000000000,
     finalReaction,
     producer,
     middleReactions,

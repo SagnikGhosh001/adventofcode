@@ -67,6 +67,8 @@ const increaseGrid = (grid) => {
 const main = () => {
   let grid = parseInput();
   grid = increaseGrid(grid);
+  // console.log(grid);
+
   const cost = dijekstraShortestPath(grid);
   console.log(cost);
 };

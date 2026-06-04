@@ -129,7 +129,7 @@ const intcode = (copyArray, ip = 0, rb = 0, input) => {
   }
 };
 
-const dbg = () => {
+const dbg = (x) => {
   console.log(x);
   return x;
 };
@@ -254,8 +254,6 @@ const part2 = () => {
   const AFn = [..."L,12,L,8,L,8\n"];
   const BFn = [..."L,12,R,4,L,12,R,6\n"];
   const CFn = [..."R,4,L,12,L,12,R,6\n"];
-
-  console.log(AFn);
 
   const inputData = [
     ...mainRoutine.map((char) => char.charCodeAt(0)),

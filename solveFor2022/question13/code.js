@@ -1,10 +1,13 @@
 const input = Deno.readTextFileSync("solveFor2022/question13/input.txt");
 
+// const parseInput = () =>
+//   input.split("\n\n").map((ele) => ele.split("\n").map((ele) => eval(ele)));
+
 const parseInput = () =>
-  input.split("\n\n").map((ele) => ele.split("\n").map((ele) => eval(ele)));
+  input.split("\n\n").flatMap((ele) => ele.split("\n").map((ele) => eval(ele)));
 
 const compareValue = (value1, value2) => {
-  if (typeof value1 === "object" || typeof value2 === "object") {
+  if (Array.isArray(value1) || Array.isArray(value2)) {
     return compareList(value1, value2);
   }
 
@@ -44,4 +47,27 @@ const part1 = () => {
   console.log(trueIndexes, trueIndexes.reduce((m, e) => m += e));
 };
 
-part1();
+// part1();
+
+const part2 = () => {
+  const packets = parseInput();
+  const sortedPackets = packets.toSorted((a, b) => {
+    if (compareList(a, b) === undefined) return 0;
+    return compareList(a, b) ? -1 : 1;
+  });
+
+  const indexes = [];
+  for (let index = 0; index < sortedPackets.length; index++) {
+    if (
+      sortedPackets[index].length === 1 &&
+      sortedPackets[index][0].length === 1 &&
+      (sortedPackets[index][0][0] === 2 || sortedPackets[index][0][0] === 6)
+    ) {
+      indexes.push(index + 1);
+    }
+  }
+
+  console.log(indexes[0] * indexes[1]);
+};
+
+part2();
